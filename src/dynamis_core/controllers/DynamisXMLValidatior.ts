@@ -3,7 +3,7 @@ export class DynamisXMLValidatior {
         const pointAngle = /(>|<)/g;
         let isInBrackets:boolean = false;
         // @ts-ignore
-        const arr:Array<RegExpMatchArray> = [...str.matchAll(pointAngle)];
+        const arr:Array<RegExpMatchArray> = Array.from(str.matchAll(pointAngle));
         for(let i = 0; i < arr.length; i++){
             const char = arr[i][0];
             switch (char) {
