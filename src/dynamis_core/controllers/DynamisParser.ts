@@ -7,8 +7,7 @@ export class DynamisParser {
     }
     public Parse(){
         const regex = DynamisRegex.GeneralRegex;
-        // @ts-ignore
-        const res = [...this.val.matchAll(regex)];
+        const res = Array.from(this.val.matchAll(regex));
         return res.map(e => e[0]);
 
     }
