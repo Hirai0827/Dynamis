@@ -23,13 +23,13 @@ if(!DynamisXMLValidatior.Validate(src)){
     console.error("Validation Failed");
     return null;
         }
-        const dynamisParser = new DynamisParser(src);
-        const res = dynamisParser.Parse();
-        const ast:DynamisAST = DynamisASTGenerator.Generate(res);
-        ast.props  = {posId:0,distId:0};
-        ast.allocateProps({posId:0,distId:0});
-        console.log(ast.generateCode());//generated Code.
-        console.log(DynamisASTVisualizer.Visualize(ast));
+const dynamisParser = new DynamisParser(src);
+const res = dynamisParser.Parse();
+const ast:DynamisAST = DynamisASTGenerator.Generate(res);
+ast.props  = {posId:0,distId:0};
+ast.allocateProps({posId:0,distId:0});
+console.log(ast.generateCode());//generated Code.
+console.log(DynamisASTVisualizer.Visualize(ast));
 
 ```
 ## Contact
