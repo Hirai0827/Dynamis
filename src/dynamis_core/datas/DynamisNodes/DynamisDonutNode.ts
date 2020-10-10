@@ -14,7 +14,7 @@ export class DynamisDonutNode implements IDynamisNode{
         const plane = DynamisMathUtils.convertAxis2Plane(axis);
         const rad = this.params["radius"] ? this.params["radius"] : 0.5;
         const width = this.params["width"] ? this.params["width"] : 0.1;
-        let str:string = `${distName} = min(${distName},length(vec2(length(${posName}.${plane})-${rad},${posName}.${axis})) - ${width});\n`;
+        let str:string = `${distName} = min(${distName},length(vec2(length(${posName}.${plane})-(${rad}),${posName}.${axis})) - (${width}));\n`;
         return str;
     };
     params: DynamisNodeParams = {};
