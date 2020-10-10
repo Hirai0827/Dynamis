@@ -15,7 +15,7 @@ export class DynamisScaleNode implements IDynamisNode {
             let x:string = this.params["x"] ? this.params["x"] : "1.0";
             let y:string = this.params["y"] ? this.params["y"] : "1.0";
             let z:string = this.params["z"] ? this.params["z"] : "1.0";
-            str += `${posName} = vec3(${parentPosName}.x / ${x},${parentPosName}.y / ${y},${parentPosName}.z / ${z});\n`;
+            str += `${posName} = vec3(${parentPosName}.x / (${x}),${parentPosName}.y / (${y}),${parentPosName}.z / (${z}));\n`;
         }
         for(let i = 0; i < this.child.length; i++){
             const codeGenerateResult = this.child[i].generateCode();
