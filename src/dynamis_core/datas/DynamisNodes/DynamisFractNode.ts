@@ -16,9 +16,9 @@ export class DynamisFractNode implements IDynamisNode {
             const y = this.params["y"] ? this.params["y"] : "1.0";
             const z = this.params["z"] ? this.params["z"] : "1.0";
             str += `vec3 ${posName} = ${parentPosName};\n`;
-            str += `vec3 ${posName}.x = (fract(${parentPosName}.x/${x} + 0.5) - 0.5) * ${x};\n`;
-            str += `vec3 ${posName}.y = (fract(${parentPosName}.y/${y} + 0.5) - 0.5) * ${y};\n`;
-            str += `vec3 ${posName}.z = (fract(${parentPosName}.z/${z} + 0.5) - 0.5) * ${z};\n`;
+            str += `${posName}.x = (fract(${parentPosName}.x/${x} + 0.5) - 0.5) * ${x};\n`;
+            str += `${posName}.y = (fract(${parentPosName}.y/${y} + 0.5) - 0.5) * ${y};\n`;
+            str += `${posName}.z = (fract(${parentPosName}.z/${z} + 0.5) - 0.5) * ${z};\n`;
         }
         for(let i = 0; i < this.child.length; i++){
             const codeGenerateResult = this.child[i].generateCode();
