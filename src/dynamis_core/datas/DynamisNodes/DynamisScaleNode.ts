@@ -7,7 +7,7 @@ export class DynamisScaleNode implements IDynamisNode {
     generateCode = () => {
         const posName = DynamisNameProvider.GetPosValName(this.props.posId);
         const parentPosName = DynamisNameProvider.GetPosValName(this.parent ? this.parent.props.posId : -1);
-        let scale:string = this.params["scale"] ? this.params["scale"] : "1.0";
+        let scale:string = this.params["size"] ? this.params["size"] : "1.0";
         let str = `vec3 ${posName} = ${parentPosName};\n`;
         str += `${posName} = ${parentPosName} / ${scale};\n`;
         for(let i = 0; i < this.child.length; i++){
