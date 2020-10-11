@@ -15,7 +15,7 @@ export class DynamisPmodNode implements IDynamisNode {
         let str = `vec3 ${posName} = ${parentPosName};\n`;
         str += `float ${posName}_r = length(${parentPosName}.${plane});\n`;
         str += `float ${posName}_theta = atan(${parentPosName}.${plane[1]}/${parentPosName}.${plane[0]});\n`;
-        str += `${posName}_theta = (fract(${posName}_theta / (6.2830/(${div})) + 0.5) + 0.5) * (6.2830/(${div}));\n`;
+        str += `${posName}_theta = (fract(${posName}_theta / (6.2830/(${div})) + 0.5) - 0.5) * (6.2830/(${div}));\n`;
         str += `${posName}.${plane} = vec2(cos(${posName}_theta),sin(${posName}_theta))*${posName}_r;\n`;
         for(let i = 0; i < this.child.length; i++){
             const codeGenerateResult = this.child[i].generateCode();
