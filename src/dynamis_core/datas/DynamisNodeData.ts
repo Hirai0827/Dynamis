@@ -13,9 +13,10 @@ import {DynamisTwistNode} from "./DynamisNodes/DynamisTwistNode";
 import {DynamisAbsNode} from "./DynamisNodes/DynamisAbsNode";
 import {DynamisScaleNode} from "./DynamisNodes/DynamisScaleNode";
 import {DynamisDonutNode} from "./DynamisNodes/DynamisDonutNode";
+import {DynamisPmodNode} from "./DynamisNodes/DynamisPmodNode";
 
 export type DynamisShapeNodeName = "box"|"sphere"|"pillar"|"donut";
-export type DynamisTransformNodeName = "translate"|"minus"|"rot"|"fract"|"twist"|"abs"|"scale";
+export type DynamisTransformNodeName = "translate"|"minus"|"rot"|"fract"|"twist"|"abs"|"scale"|"pmod";
 export type DynamisCoreNodeName = "root"|"render";
 export type DynamisNodeName = DynamisCoreNodeName|DynamisShapeNodeName|DynamisTransformNodeName;
 export const GenerateDynamisNode:(name:DynamisNodeName) => IDynamisNode = (name:DynamisNodeName) => {
@@ -59,6 +60,9 @@ export const GenerateDynamisNode:(name:DynamisNodeName) => IDynamisNode = (name:
             break;
         case "donut":
             node = new DynamisDonutNode();
+            break;
+        case "pmod":
+            node = new DynamisPmodNode();
             break;
         default:
             console.error("UndefinedNodeError");
