@@ -6,7 +6,7 @@ export namespace FunctionCode{
 float ${distName} = 10000000.0;
 `;
     };
-    export const getMapPost = (distName:string) => {
+    export const getMapPost = (distName:string,iter:string) => {
         return `return ${distName};
 }
 
@@ -24,7 +24,7 @@ vec3 getNormal(vec3 p)
 
 vec4 trace(vec3 c,vec3 r){
     float t = 0.0;
-    for(int i = 0; i < 128; i++){
+    for(int i = 0; i < ${iter}; i++){
         vec3 p = c + r * t;
        t += map(p) * 0.5;
     }
