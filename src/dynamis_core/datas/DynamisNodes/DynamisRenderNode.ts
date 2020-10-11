@@ -10,13 +10,14 @@ export class DynamisRenderNode implements IDynamisNode{
     generateCode = () => {
         const posName = DynamisNameProvider.GetPosValName(this.props.posId);
         const distName = DynamisNameProvider.GetDistValName(this.props.distId);
-        const iter = this.params["iter"]? this.params["iter"] : 128;
+        const iter = this.params["iter"]? this.params["iter"] : "128";
+        const weight = this.params["weight"]? this.params["weight"] : "0.5";
         let str:string = FunctionCode.getMapPre(distName,posName);
         for(let i = 0; i < this.child.length; i++){
             const codeGenerateResult = this.child[i].generateCode();
             str += codeGenerateResult;
         }
-        str += FunctionCode.getMapPost(distName,iter.toString());
+        str += FunctionCode.getMapPost(distName,iter,weight);
 
         const camera:DynamisStrVec3 = {
             x:this.params["camX"]?this.params["camX"]:"0.0",
