@@ -65,7 +65,7 @@ export const GenerateDynamisNode:(name:DynamisNodeName) => IDynamisNode = (name:
             node = new DynamisPmodNode();
             break;
         default:
-            console.error("UndefinedNodeError");
+            console.error(name + " is not defined");
             throw new Error("Undefined Node Error");
             node = new DynamisUndefinedNode();
     }
