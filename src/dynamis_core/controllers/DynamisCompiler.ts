@@ -13,7 +13,16 @@ export namespace DynamisCompiler {
             return {
                 state:"failed",
                 errorType:"ParseError",
-                errorMessage:errorMessage,
+                errorMessage:"Bracket array is not correct.may be some lack of \"<\" or \">\". ",
+                data:"error"
+            } as CompileResult;
+        }
+        if(!DynamisXMLValidatior.ValidateTagOnly(src)){
+            console.error("Validation Failed");
+            return {
+                state:"failed",
+                errorType:"ParseError",
+                errorMessage:"Dynamis Only Accept Tags. remove characters which are not in tag",
                 data:"error"
             } as CompileResult;
         }

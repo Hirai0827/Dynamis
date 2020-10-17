@@ -1,3 +1,5 @@
+import {DynamisRegex} from "../datas/DynamisRegex";
+
 export class DynamisXMLValidatior {
     public static Validate:(str:string) => boolean = (str:string) => {
         const pointAngle = /(>|<)/g;
@@ -24,5 +26,9 @@ export class DynamisXMLValidatior {
             return false;
         }
         return true;
+    }
+    public static ValidateTagOnly:(str:string) => boolean = (str:string) => {
+        const tagOnlyCheck = DynamisRegex.OnlyTagCheckRegex;
+        return tagOnlyCheck.test(str);
     }
 }

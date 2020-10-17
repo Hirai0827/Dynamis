@@ -12,11 +12,14 @@ test("ParseTest",() => {
     expect(res.state).toBe("success");
     //空タグになっていない
     res = DynamisCompiler.Compile("<render><sphere></render>");
-    expect(res.state).toBe("failed");
+    expect(res.errorType).toBe("ParseError");
     //OK
     res = DynamisCompiler.Compile("<render><sphere/></render>");
     expect(res.state).toBe("success");
     //存在しないタグ
     res = DynamisCompiler.Compile("<render><hogehoge/></render>");
     expect(res.errorType).toBe("UnexpectedNodeError");
+    //非タグの挿入
+    res = DynamisCompiler.Compile("<render><sphere/>aaa</render>");
+    expect(res.state).toBe("failed");
 });
