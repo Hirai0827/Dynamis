@@ -38,4 +38,7 @@ test("ParseTest",() => {
     //タブの挿入
     res = DynamisCompiler.Compile(`<render>\t   <sphere/>\n</render>`);
     expect(res.state).toBe("success");
+    //OK パラメータ付き
+    res = DynamisCompiler.Compile("<render><sphere radius = '12.0'/></render>");
+    expect(res.state).toBe("success");
 });
