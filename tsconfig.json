@@ -73,5 +73,6 @@
       "dom.iterable",
       "es2020.string"
     ]
-  }
+  },
+  "exclude": ["./babel.config.js"]
 }
