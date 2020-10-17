@@ -8,7 +8,7 @@ test("ParseTest",() => {
     res = DynamisCompiler.Compile("<render></render1>");
     expect(res.state).toBe("failed");
     //OK
-    res = DynamisCompiler.Compile("<render></render>");
+    res = DynamisCompiler.Compile("<render> </render>");
     expect(res.state).toBe("success");
     //空タグになっていない
     res = DynamisCompiler.Compile("<render><sphere></render>");
@@ -28,4 +28,14 @@ test("ParseTest",() => {
     //非タグの挿入
     res = DynamisCompiler.Compile("<render><sphere/>aaa</render>");
     expect(res.state).toBe("failed");
+    //改行の挿入
+    res = DynamisCompiler.Compile(`\n<render><sphere/>
+</render>`);
+    expect(res.state).toBe("success");
+    //スペースの挿入
+    res = DynamisCompiler.Compile(`<render>   <sphere/>\n</render>`);
+    expect(res.state).toBe("success");
+    //タブの挿入
+    res = DynamisCompiler.Compile(`<render>\t   <sphere/>\n</render>`);
+    expect(res.state).toBe("success");
 });
