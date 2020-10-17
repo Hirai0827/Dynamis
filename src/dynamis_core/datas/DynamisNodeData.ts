@@ -66,6 +66,7 @@ export const GenerateDynamisNode:(name:DynamisNodeName) => IDynamisNode = (name:
             break;
         default:
             console.error("UndefinedNodeError");
+            throw new Error("Undefined Node Error");
             node = new DynamisUndefinedNode();
     }
     return node;

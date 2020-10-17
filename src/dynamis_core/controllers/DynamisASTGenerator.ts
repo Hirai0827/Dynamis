@@ -38,12 +38,14 @@ export class DynamisASTGenerator {
                         dynamisStack.pop();
                     }else{
                         console.error("Syntax Error");
+                        throw Error("Syntax Error");
                     }
                     break;
             }
         }
         if(!dynamisStack.empty()){
             console.error("Syntax Error");
+            throw Error("Syntax Error");
         }
         return dynamisRootNode;
     }

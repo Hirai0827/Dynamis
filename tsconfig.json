@@ -74,5 +74,5 @@
       "es2020.string"
     ]
   },
-  "exclude": ["./babel.config.js"]
+  "exclude": ["./babel.config.js","./.babelrc"]
 }
