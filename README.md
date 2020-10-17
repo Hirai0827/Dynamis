@@ -18,6 +18,11 @@ sandbox - https://dynamis-sample.web.app/
 - others- necessary files which are used in sample project which 
 made with React/Next.js/Three.js/AceEditor
 ## Usage
+Import the package.
+```
+yarn add https://github.com/Hirai0827/Dynamis
+```
+Then, compile DynamisCode to GLSL.
 ```typescript
 const res = DynamisCompiler.Compile("<render><sphere></render>");
 const generatedGLSL = res.data;
