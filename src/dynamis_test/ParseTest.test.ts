@@ -19,6 +19,12 @@ test("ParseTest",() => {
     //存在しないタグ
     res = DynamisCompiler.Compile("<render><hogehoge/></render>");
     expect(res.errorType).toBe("UnexpectedNodeError");
+    //OK パラメータ付き
+    res = DynamisCompiler.Compile("<render><sphere radius='12.0'/></render>");
+    expect(res.state).toBe("success");
+    //パラメータ不正
+    res = DynamisCompiler.Compile("<render><hogehoge radius='12.0' hoge/></render>");
+    expect(res.errorType).toBe("ParseError");
     //非タグの挿入
     res = DynamisCompiler.Compile("<render><sphere/>aaa</render>");
     expect(res.state).toBe("failed");
