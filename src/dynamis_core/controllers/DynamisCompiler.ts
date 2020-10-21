@@ -3,9 +3,10 @@ import {DynamisParser} from "./DynamisParser";
 import {DynamisAST} from "../datas/DynamisAST";
 import {DynamisASTGenerator} from "./DynamisASTGenerator";
 import {DynamisASTVisualizer} from "../debug/DynamisASTVisualizer";
+import {DynamisCompileOption} from "../datas/DynamisCompileOption";
 
 export namespace DynamisCompiler {
-    export const Compile : (src:string,option?:CompileOption) => CompileResult =(src:string) => {
+    export const Compile : (src:string,option?:DynamisCompileOption) => CompileResult =(src:string,option?:DynamisCompileOption) => {
         let state:CompileState = "failed";
         let errorMessage:ErrorMessage = "";
         if(!DynamisXMLValidatior.Validate(src)){
@@ -51,7 +52,7 @@ export namespace DynamisCompiler {
         ast.props  = {posId:0,distId:0};
         ast.allocateProps({posId:0,distId:0});
         let data = "";
-        data = ast.generateCode();
+        data = ast.generateCode(option);
 
         return {
             state:"success",
@@ -60,10 +61,7 @@ export namespace DynamisCompiler {
             data:data,
             ast:ast
         } as CompileResult;
-    }
-    export interface CompileOption {
-
-    }
+    };
     export type CompileState = "success"|"failed";
     export type ErrorType = null|"ParseError"|"UnexpectedNodeError";
     export type ErrorMessage = string;

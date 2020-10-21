@@ -1,12 +1,13 @@
 import {IDynamisNode} from "../IDynamisNode";
 import {RootCode} from "../GLSLTempletes/RootCode";
 import {CodeGenerateProps, CodeGenerateResult, DynamisNodeParams} from "../DynamisNodeData";
+import {DynamisCompileOption} from "../DynamisCompileOption";
 
 export class DynamisRootNode implements IDynamisNode{
     child:Array<IDynamisNode> = new Array<IDynamisNode>();
     parent:IDynamisNode|null = null;
-    generateCode = () => {
-        let str:string = RootCode.GetRootPre();
+    generateCode = (option?:DynamisCompileOption) => {
+        let str:string = RootCode.GetRootPre(option);
         for(let i = 0; i < this.child.length; i++){
             str += this.child[i].generateCode();
         }
