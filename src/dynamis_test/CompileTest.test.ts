@@ -1,9 +1,9 @@
 import {DynamisCompiler} from "../dynamis_core/controllers/DynamisCompiler";
-type CompileResult = "success"|"failed";
+type CompileResult = "success"|"failed"|"no_context"|"no_shader";
 const CompileForTest:(src:string) => CompileResult = (src) => {
     const headlessGl = require("gl");
     const gl = headlessGl(200, 200, { preserveDrawingBuffer: true });
-    //console.log(canvas);\
+    //console.log(canvas);
     if(gl){
         let tmp_s = gl.createShader(gl.FRAGMENT_SHADER);
         if(tmp_s){
@@ -14,10 +14,14 @@ const CompileForTest:(src:string) => CompileResult = (src) => {
                 return "success";
             }else{
                 console.error(status);
+                return "failed"
             }
+        }else{
+            return "no_shader"
         }
+    }else{
+        return "no_context";
     }
-    return "failed";
 };
 
 test("CompileTest",() => {

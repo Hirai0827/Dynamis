@@ -8,13 +8,11 @@
   ],
   "scripts": {
     "build": "tsc",
-    "prepare": "npm run build",
+    "prepare": "yarn run build",
     "test": "jest"
   },
   "jest": {
-    "setupFiles": [
-
-    ]
+    "setupFiles": []
   },
   "keywords": [],
   "author": "",
@@ -26,7 +24,6 @@
     "@jest/globals": "^26.5.3",
     "@types/jest": "^26.0.14",
     "babel-jest": "^26.5.2",
-    "canvas": "^2.6.1",
     "gl": "^4.8.0",
     "jest": "^26.5.3",
     "typescript": "^4.0.3"
