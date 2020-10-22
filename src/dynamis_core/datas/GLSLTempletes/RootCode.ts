@@ -5,8 +5,9 @@ export namespace RootCode{
     export const GetRootPre = (options?:DynamisCompileOption) => {
         if(options){
             return `precision highp float;
-${options.uniforms ? GenerateUniformDefinition(options.uniforms):`uniform vec3 resolution;
-uniform float time;`}
+${`uniform vec3 resolution;
+uniform float time;
+`+GenerateUniformDefinition(options.uniforms)}
 `;
         }else{
             return `precision highp float;
