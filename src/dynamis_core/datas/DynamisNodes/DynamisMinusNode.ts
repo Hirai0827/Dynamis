@@ -17,7 +17,7 @@ export class DynamisMinusNode implements IDynamisNode{
         str += `${parentDistName} = max(${parentDistName},-${distName});\n`;
         return str;
     };
-    params: DynamisNodeParams = {};
+    params: DynamisNodeParams = new DynamisNodeParams();
     allocateProps: (codeGenerateProps: CodeGenerateProps) => CodeGenerateProps = codeGenerateProps => {
         codeGenerateProps.distId++;
         this.props.posId = this.parent ? this.parent.props.posId : -1;

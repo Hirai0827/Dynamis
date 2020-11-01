@@ -8,11 +8,11 @@ export class DynamisSphereNode implements IDynamisNode{
     generateCode = () => {
         const posName = DynamisNameProvider.GetPosValName(this.props.posId);
         const distName = DynamisNameProvider.GetDistValName(this.props.distId);
-        const rad = this.params["radius"] ? this.params["radius"] : 0.5;
+        const rad = this.params.Get("radius","0.5");
         let str:string = `${distName} = min(${distName},length(${posName}) - ${rad});\n`;
         return str;
     };
-    params: DynamisNodeParams = {};
+    params: DynamisNodeParams = new DynamisNodeParams();
     allocateProps: (codeGenerateProps: CodeGenerateProps) => CodeGenerateProps = codeGenerateProps => {
         this.props.posId = this.parent ? this.parent.props.posId : -1;
         this.props.distId = this.parent ? this.parent.props.distId : -1;

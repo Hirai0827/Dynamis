@@ -5,14 +5,14 @@ import {DynamisNodeName, DynamisNodeParams, GenerateDynamisNode} from "../datas/
 export class DynamisNodeGenerator {
     public static GenerateFromRegRes:(data:RegExpMatchArray) => IDynamisNode = (data:RegExpMatchArray) => {
         const name:DynamisNodeName = data[1] as DynamisNodeName;
-        let params:DynamisNodeParams = {};
+        let params:DynamisNodeParams = new DynamisNodeParams();
 
         const src:string = data[0];
         const paramRegex = DynamisRegex.ParamRegex;
         while(true){
             const res = paramRegex.exec(src);
             if(res){
-                params[res[1]] = res[2].substring(1,res[2].length-1);
+                params.Push(res[1],res[2].substring(1,res[2].length-1));
             }else{
                 break;
             }

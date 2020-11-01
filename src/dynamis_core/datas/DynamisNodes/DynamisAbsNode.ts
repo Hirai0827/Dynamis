@@ -8,7 +8,7 @@ export class DynamisAbsNode implements IDynamisNode {
     generateCode = () => {
         const posName = DynamisNameProvider.GetPosValName(this.props.posId);
         const parentPosName = (this.parent) ? DynamisNameProvider.GetPosValName(this.parent.props.posId) : null;
-        let axis:string = this.params["axis"] ? this.params["axis"] : "x";
+        let axis:string = this.params.Get("axis","x");
         if(axis != "xyz"){
             axis = DynamisMathUtils.validateAxis(axis) ? axis : "x";
         }
@@ -20,7 +20,7 @@ export class DynamisAbsNode implements IDynamisNode {
         }
         return str;
     };
-    params: DynamisNodeParams = {};
+    params: DynamisNodeParams = new DynamisNodeParams();
     parent: IDynamisNode | null = null;
     allocateProps: (codeGenerateProps: CodeGenerateProps) => CodeGenerateProps = codeGenerateProps => {
         codeGenerateProps.posId++;

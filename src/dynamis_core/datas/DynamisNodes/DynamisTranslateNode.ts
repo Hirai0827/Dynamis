@@ -7,9 +7,9 @@ export class DynamisTranslateNode implements IDynamisNode {
     generateCode = () => {
         const posName = DynamisNameProvider.GetPosValName(this.props.posId);
         const parentPosName = DynamisNameProvider.GetPosValName(this.parent ? this.parent.props.posId : -1);
-        const x = this.params["x"] ? this.params["x"] : 0.0;
-        const y = this.params["y"] ? this.params["y"] : 0.0;
-        const z = this.params["z"] ? this.params["z"] : 0.0;
+        const x = this.params.Get("x","0.0");
+        const y = this.params.Get("y","0.0");
+        const z = this.params.Get("z","0.0");
         let str = `vec3 ${posName} = ${parentPosName} - vec3(${x},${y},${z});\n`;
         for(let i = 0; i < this.child.length; i++){
             const codeGenerateResult = this.child[i].generateCode();
@@ -17,7 +17,7 @@ export class DynamisTranslateNode implements IDynamisNode {
         }
         return str;
     };
-    params: DynamisNodeParams = {};
+    params: DynamisNodeParams = new DynamisNodeParams();
     parent: IDynamisNode | null = null;
     allocateProps: (codeGenerateProps: CodeGenerateProps) => CodeGenerateProps = codeGenerateProps => {
         codeGenerateProps.posId++;

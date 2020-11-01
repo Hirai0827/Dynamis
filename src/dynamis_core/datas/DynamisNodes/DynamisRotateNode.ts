@@ -8,10 +8,10 @@ export class DynamisRotateNode implements IDynamisNode {
     generateCode = () => {
         const posName = DynamisNameProvider.GetPosValName(this.props.posId);
         const parentPosName = DynamisNameProvider.GetPosValName(this.parent ? this.parent.props.posId : -1);
-        let axis:string = this.params["axis"] ? this.params["axis"] : "x";
+        let axis:string = this.params.Get("axis","x");
         axis = DynamisMathUtils.validateAxis(axis) ? axis : "x";
         const plane = DynamisMathUtils.convertAxis2Plane(axis);
-        let angle:string = this.params["angle"] ? this.params["angle"] : "0.0";
+        let angle:string = this.params.Get("angle","0.0");
         let str = `vec3 ${posName} = ${parentPosName};\n`;
         str += `${posName}.${plane} = ${parentPosName}.${plane} * mat2(cos(${angle}),-sin(${angle}),sin(${angle}),cos(${angle}));\n`;
         for(let i = 0; i < this.child.length; i++){
@@ -20,7 +20,7 @@ export class DynamisRotateNode implements IDynamisNode {
         }
         return str;
     };
-    params: DynamisNodeParams = {};
+    params: DynamisNodeParams = new DynamisNodeParams();
     parent: IDynamisNode | null = null;
     allocateProps: (codeGenerateProps: CodeGenerateProps) => CodeGenerateProps = codeGenerateProps => {
         codeGenerateProps.posId++;

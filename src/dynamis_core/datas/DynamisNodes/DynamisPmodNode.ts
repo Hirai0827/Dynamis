@@ -8,10 +8,10 @@ export class DynamisPmodNode implements IDynamisNode {
     generateCode = () => {
         const posName = DynamisNameProvider.GetPosValName(this.props.posId);
         const parentPosName = DynamisNameProvider.GetPosValName(this.parent ? this.parent.props.posId : -1);
-        let axis:string = this.params["axis"] ? this.params["axis"] : "x";
+        let axis:string = this.params.Get("axis","x");
         axis = DynamisMathUtils.validateAxis(axis) ? axis : "x";
         const plane = DynamisMathUtils.convertAxis2Plane(axis);
-        let div:string = this.params["div"] ? this.params["div"] : "6.0";
+        let div:string = this.params.Get("div","6.0");
         let str = `vec3 ${posName} = ${parentPosName};\n`;
         str += `float ${posName}_r = length(${parentPosName}.${plane});\n`;
         str += `float ${posName}_theta = atan(${parentPosName}.${plane[1]}/${parentPosName}.${plane[0]});\n`;
@@ -23,7 +23,7 @@ export class DynamisPmodNode implements IDynamisNode {
         }
         return str;
     };
-    params: DynamisNodeParams = {};
+    params: DynamisNodeParams = new DynamisNodeParams();
     parent: IDynamisNode | null = null;
     allocateProps: (codeGenerateProps: CodeGenerateProps) => CodeGenerateProps = codeGenerateProps => {
         codeGenerateProps.posId++;

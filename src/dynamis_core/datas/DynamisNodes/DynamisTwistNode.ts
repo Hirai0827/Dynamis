@@ -8,10 +8,10 @@ export class DynamisTwistNode implements IDynamisNode {
     generateCode = () => {
         const posName = DynamisNameProvider.GetPosValName(this.props.posId);
         const parentPosName = DynamisNameProvider.GetPosValName(this.parent ? this.parent.props.posId : -1);
-        let axis:string = this.params["axis"] ? this.params["axis"] : "x";
+        let axis:string = this.params.Get("axis","x");
         axis = DynamisMathUtils.validateAxis(axis) ? axis : "x";
         let plane:string = DynamisMathUtils.convertAxis2Plane(axis);
-        let weight:string = this.params["weight"] ? this.params["weight"] : "1.0";
+        let weight:string = this.params.Get("weight","0.5");
         let angle:string = `${parentPosName}.${axis} * ${weight}`;
         let str = `vec3 ${posName} = ${parentPosName};\n`;
         str += `${posName}.${plane} = ${parentPosName}.${plane} * mat2(cos(${angle}),-sin(${angle}),sin(${angle}),cos(${angle}));\n`;
@@ -21,7 +21,7 @@ export class DynamisTwistNode implements IDynamisNode {
         }
         return str;
     };
-    params: DynamisNodeParams = {};
+    params: DynamisNodeParams = new DynamisNodeParams();
     parent: IDynamisNode | null = null;
     allocateProps: (codeGenerateProps: CodeGenerateProps) => CodeGenerateProps = codeGenerateProps => {
         codeGenerateProps.posId++;

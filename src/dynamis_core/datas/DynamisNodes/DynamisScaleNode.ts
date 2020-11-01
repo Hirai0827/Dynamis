@@ -8,13 +8,13 @@ export class DynamisScaleNode implements IDynamisNode {
         const posName = DynamisNameProvider.GetPosValName(this.props.posId);
         const parentPosName = DynamisNameProvider.GetPosValName(this.parent ? this.parent.props.posId : -1);
         let str = `vec3 ${posName} = ${parentPosName};\n`;
-        if(this.params["size"]){
-            let scale:string = this.params["size"] ? this.params["size"] : "1.0";
+        if(this.params.Find("size")){
+            let scale:string = this.params.Get("size","1.0");
             str += `${posName} = ${parentPosName} / ${scale};\n`;
         }else{
-            let x:string = this.params["x"] ? this.params["x"] : "1.0";
-            let y:string = this.params["y"] ? this.params["y"] : "1.0";
-            let z:string = this.params["z"] ? this.params["z"] : "1.0";
+            let x:string = this.params.Get("x","1.0");
+            let y:string = this.params.Get("y","1.0");
+            let z:string = this.params.Get("z","1.0");
             str += `${posName} = vec3(${parentPosName}.x / (${x}),${parentPosName}.y / (${y}),${parentPosName}.z / (${z}));\n`;
         }
         for(let i = 0; i < this.child.length; i++){
@@ -23,7 +23,7 @@ export class DynamisScaleNode implements IDynamisNode {
         }
         return str;
     };
-    params: DynamisNodeParams = {};
+    params: DynamisNodeParams = new DynamisNodeParams();
     parent: IDynamisNode | null = null;
     allocateProps: (codeGenerateProps: CodeGenerateProps) => CodeGenerateProps = codeGenerateProps => {
         codeGenerateProps.posId++;
