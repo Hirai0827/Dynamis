@@ -15,8 +15,7 @@ sandbox - https://dynamis-sample.web.app/
 <a href="https://gyazo.com/f64ebb1b7c213c785c1392ab1569cbf0"><img src="https://i.gyazo.com/f64ebb1b7c213c785c1392ab1569cbf0.gif" alt="Image from Gyazo" width="1460"/></a>
 ## Contents
 - Dynamis_core - the core parts of Dynamis.
-- others- necessary files which are used in sample project which 
-made with React/Next.js/Three.js/AceEditor
+- Dynamis_test - the test of Dynamis.
 ## Usage
 Import the package.
 ```
