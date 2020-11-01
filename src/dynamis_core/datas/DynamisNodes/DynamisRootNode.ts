@@ -14,7 +14,7 @@ export class DynamisRootNode implements IDynamisNode{
         str += RootCode.GetRootPost();
         return str;
     };
-    params: DynamisNodeParams = {};
+    params: DynamisNodeParams = new DynamisNodeParams();
     allocateProps: (codeGenerateProps: CodeGenerateProps) => CodeGenerateProps = codeGenerateProps => {
         this.props.posId = codeGenerateProps.posId;
         this.props.distId = codeGenerateProps.distId;

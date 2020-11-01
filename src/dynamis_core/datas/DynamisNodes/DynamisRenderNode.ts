@@ -10,8 +10,8 @@ export class DynamisRenderNode implements IDynamisNode{
     generateCode = () => {
         const posName = DynamisNameProvider.GetPosValName(this.props.posId);
         const distName = DynamisNameProvider.GetDistValName(this.props.distId);
-        const iter = this.params["iter"]? this.params["iter"] : "128";
-        const weight = this.params["weight"]? this.params["weight"] : "0.5";
+        const iter = this.params.Get("iter","128");
+        const weight = this.params.Get("weight","0.5");
         let str:string = FunctionCode.getMapPre(distName,posName);
         for(let i = 0; i < this.child.length; i++){
             const codeGenerateResult = this.child[i].generateCode();
@@ -20,21 +20,21 @@ export class DynamisRenderNode implements IDynamisNode{
         str += FunctionCode.getMapPost(distName,iter,weight);
 
         const camera:DynamisStrVec3 = {
-            x:this.params["camX"]?this.params["camX"]:"0.0",
-            y:this.params["camY"]?this.params["camY"]:"0.0",
-            z:this.params["camZ"]?this.params["camZ"]:"-1.5"
+            x:this.params.Get("camX","0.0"),
+            y:this.params.Get("camY","0.0"),
+            z:this.params.Get("camZ","-1.5")
         };
-        const rz = this.params["rayZ"]?this.params["rayZ"]:"1.5";
+        const rz = this.params.Get("rayZ","1.5");
         const color:DynamisStrVec3 = {
-            x:this.params["colX"]?this.params["colX"] : "gl_FragColor.x",
-            y:this.params["colY"]?this.params["colY"] : "gl_FragColor.y",
-            z:this.params["colZ"]?this.params["colZ"] : "gl_FragColor.z",
+            x:this.params.Get("colX","gl_FragColor.x"),
+            y:this.params.Get("colY","gl_FragColor.y"),
+            z:this.params.Get("colZ","gl_FragColor.z"),
         }
 
         str += FunctionCode.getMainFunc(camera,rz,color);
         return str;
     };
-    params: DynamisNodeParams = {};
+    params: DynamisNodeParams = new DynamisNodeParams();
     allocateProps: (codeGenerateProps: CodeGenerateProps) => CodeGenerateProps = codeGenerateProps => {
         this.props.posId = codeGenerateProps.posId;
         this.props.distId = codeGenerateProps.distId;

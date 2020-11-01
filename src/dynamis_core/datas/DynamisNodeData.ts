@@ -71,7 +71,23 @@ export const GenerateDynamisNode:(name:DynamisNodeName) => IDynamisNode = (name:
     }
     return node;
 };
-export type DynamisNodeParams = {[name:string]:string};
+//export type DynamisNodeParams = {[name:string]:string};
+export class DynamisNodeParams {
+    data:{[name:string]:string};
+    constructor() {
+        this.data = {};
+    }
+    Push:(key:string,value:string) => void=(key,value) => {
+        this.data[key] = value;
+    }
+    Get:(key:string,defaultValue:string) => string = (key,defaultValue) => {
+        return this.data[key] ? this.data[key]:defaultValue;
+    }
+    Find:(key:string)=>boolean = (key:string) => {
+        return (this.data[key] != undefined);
+    }
+
+}
 export interface CodeGenerateProps {
     posId:number;
     distId:number;
