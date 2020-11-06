@@ -1,9 +1,9 @@
 import {IDynamisNode} from "../IDynamisNode";
 import {CodeGenerateProps, CodeGenerateResult, DynamisNodeParams} from "../DynamisNodeData";
 import {DynamisNameProvider} from "../../controllers/DynamisNameProvider";
+import {DynamisTransformNode} from "./DynamisTransformNode";
 
-export class DynamisFractNode implements IDynamisNode {
-    child: Array<IDynamisNode> = new Array<IDynamisNode>();
+export class DynamisFractNode extends DynamisTransformNode{
     generateCode = () => {
         const posName = DynamisNameProvider.GetPosValName(this.props.posId);
         const parentPosName = DynamisNameProvider.GetPosValName(this.parent ? this.parent.props.posId : -1);
@@ -26,18 +26,6 @@ export class DynamisFractNode implements IDynamisNode {
         }
         return str;
     };
-    params: DynamisNodeParams = new DynamisNodeParams();
-    parent: IDynamisNode | null = null;
-    allocateProps: (codeGenerateProps: CodeGenerateProps) => CodeGenerateProps = codeGenerateProps => {
-        codeGenerateProps.posId++;
-        this.props.posId = codeGenerateProps.posId;
-        this.props.distId = this.parent ? this.parent.props.distId : -1;
-        for(let i = 0; i < this.child.length; i++){
-            codeGenerateProps = this.child[i].allocateProps(codeGenerateProps);
-        }
-        return codeGenerateProps;
-    };
-    props: CodeGenerateProps = {posId:-1,distId:-1};
 
 
 }
