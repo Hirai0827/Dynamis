@@ -13,7 +13,11 @@ export class DynamisDonutNode extends DynamisShapeNode{
         const plane = DynamisMathUtils.convertAxis2Plane(axis);
         const rad = this.params.Get("radius","0.5");
         const width = this.params.Get("width","0.1");
-        let str:string = `${distName} = min(${distName},length(vec2(length(${posName}.${plane})-(${rad}),${posName}.${axis})) - (${width}));\n`;
+        const offX = this.params.Get("offX","0.0");
+        const offY = this.params.Get("offY","0.0");
+        const offZ = this.params.Get("offZ","0.0");
+        const vec = `vec3(${offX},${offY},${offZ})`;
+        let str:string = `${distName} = min(${distName},length(vec2(length(${posName}.${plane} - ${vec}.${plane})-(${rad}),${posName}.${axis} - ${vec}.${axis})) - (${width}));\n`;
         return str;
     };
 }
