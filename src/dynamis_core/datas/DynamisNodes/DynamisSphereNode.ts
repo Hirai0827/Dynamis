@@ -1,10 +1,9 @@
 import {IDynamisNode} from "../IDynamisNode";
 import {DynamisNameProvider} from "../../controllers/DynamisNameProvider";
 import {CodeGenerateProps, CodeGenerateResult, DynamisNodeParams} from "../DynamisNodeData";
+import {DynamisShapeNode} from "./DynamisShapeNode";
 
-export class DynamisSphereNode implements IDynamisNode{
-    child:Array<IDynamisNode> = new Array<IDynamisNode>();
-    parent:IDynamisNode|null = null;
+export class DynamisSphereNode extends DynamisShapeNode{
     generateCode = () => {
         const posName = DynamisNameProvider.GetPosValName(this.props.posId);
         const distName = DynamisNameProvider.GetDistValName(this.props.distId);
@@ -12,14 +11,4 @@ export class DynamisSphereNode implements IDynamisNode{
         let str:string = `${distName} = min(${distName},length(${posName}) - ${rad});\n`;
         return str;
     };
-    params: DynamisNodeParams = new DynamisNodeParams();
-    allocateProps: (codeGenerateProps: CodeGenerateProps) => CodeGenerateProps = codeGenerateProps => {
-        this.props.posId = this.parent ? this.parent.props.posId : -1;
-        this.props.distId = this.parent ? this.parent.props.distId : -1;
-        for(let i = 0; i < this.child.length; i++){
-            codeGenerateProps = this.child[i].allocateProps(codeGenerateProps);
-        }
-        return codeGenerateProps;
-    };
-    props: CodeGenerateProps = {posId:-1,distId:-1};
 }
