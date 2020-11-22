@@ -28,7 +28,45 @@ export class DynamisXMLValidatior {
         return true;
     }
     public static ValidateTagOnly:(str:string) => boolean = (str:string) => {
-        const tagOnlyCheck = DynamisRegex.OnlyTagCheckRegex;
-        return tagOnlyCheck.test(str);
+        let isInBracket = false;
+        let isInComment = false;
+        for(let i = 0; i < str.length; i++){
+            if(isInComment){
+                if(i + 1 < str.length){
+                    if(str[i] == "*" && str[i + 1] == "/"){
+                        isInComment = false;
+                        i++;
+                        continue;
+                    }
+                }
+            }else{
+                if(i + 1 < str.length){
+                    if(str[i] == "/" && str[i + 1] == "*"){
+                        isInComment = true;
+                        i++;
+                        continue;
+                    }
+                }
+                if(isInBracket){
+                    if(str[i] == ">"){
+                        isInBracket = false;
+                        continue;
+                    }
+                }else{
+                    if(str[i] == "<"){
+                        isInBracket = true;
+                        continue;
+                    }
+                    if(str[i] == " " || str[i] == "\n" || str[i] == "\t"){
+                        continue;
+                    }
+                    return false;
+                }
+            }
+        }
+        if(isInComment || isInBracket){
+            return false;
+        }
+        return true;
     }
 }
