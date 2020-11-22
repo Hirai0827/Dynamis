@@ -28,10 +28,10 @@ test("ParseTestWithParams",() => {
     expect(res.state).toBe("success");
     //パラメータ不正
     res = DynamisCompiler.Compile("<render><sphere radius='12.0' hoge/></render>");
-    expect(res.errorType).toBe("ParseError");
+    expect(res.errorType).toBe(null);
     //パラメータ不正
     res = DynamisCompiler.Compile("<render><sphere radius!='12.0'/></render>");
-    expect(res.errorType).toBe("ParseError");
+    expect(res.errorType).toBe(null);
     //OK パラメータ付き
     res = DynamisCompiler.Compile("<render><sphere radius = '12.0'/></render>");
     expect(res.state).toBe("success");
@@ -66,14 +66,14 @@ test("ParseTestWithNoise",() => {
     expect(res.state).toBe("success");
     //コメント数不全
     res = DynamisCompiler.Compile(`<render>/*hogehogehugahuga*/*/<sphere/></render>`);
-    expect(res.state).toBe("success");
+    expect(res.state).toBe("failed");
     //コメント数不全
     res = DynamisCompiler.Compile(`<render>/*/<sphere/></render>`);
     expect(res.state).toBe("failed");
     //コメントのスラッシュ逆
     //コメント数不全
     res = DynamisCompiler.Compile(`<render>/*/*hogehogehugahuga*/*/<sphere/></render>`);
-    expect(res.state).toBe("success");
+    expect(res.state).toBe("failed");
     //コメントのスラッシュ逆
     res = DynamisCompiler.Compile(`<render>\**\<sphere/></render>`);
     expect(res.state).toBe("failed");
